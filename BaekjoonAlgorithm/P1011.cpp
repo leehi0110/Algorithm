@@ -7,66 +7,60 @@
 #include <string>
 
 using namespace std;
-int cal(int step);
+int cal(int number);
 
 int main()
 {
-    ios_base :: sync_with_stdio(false);
-    cin.tie(NULL);
+    int testCase;
 
-    int test_case;
-    long int x,y;
-    long int left_distance;
-    long int step;
-    int cnt;
+    cin >> testCase;
 
-    cin >> test_case;
+    for(int i=0;i<testCase;i++){
 
-    for(int i=0;i<test_case;i++){
+        int x, y;
+        int left_distance;
+        int count = 0;
+        int nowStep = 0;
+
         cin >> x >> y;
         left_distance = y-x;
-        cnt = 0;
-        step = 0;
 
-        while(left_distance == 0){
-            if(cal(step+1) < left_distance){
-                step ++;
-                left_distance -= step;
-                cnt ++;
+        while(left_distance != 0){
+
+            if(left_distance > cal(nowStep+1)){
+                nowStep ++;
+                left_distance -= nowStep;
+                count ++;
             }
-            else if(cal(step+1) == left_distance){
-                cnt += step+1;
+            else if(left_distance == cal(nowStep+1)){
+                count += nowStep+1;
+                break;
+            }
+            else if(left_distance > cal(nowStep)){
+                left_distance -= nowStep;
+                count ++;
+            }
+            else if(left_distance == cal(nowStep)){
+                count += nowStep;
                 break;
             }
             else {
-                if(cal(step) < left_distance){
-                    left_distance -= step;
-                    cnt++;
-                }
-                else if(cal(step) == left_distance){
-                    cnt += step;
-                    break;
-                }
-                else {
-                    step--;
-                    left_distance -= step;
-                    cnt ++;
-                }
+                nowStep --;
+                left_distance -= nowStep;
+                count ++;
             }
         }
-        
-        cout << cnt << endl;
+
+        cout << count << endl;
     }
 
 }
 
-int cal(int step)
+int cal(int number)
 {
-    int sum=0;
-
-    for(int i=step;i>0;i--){
+    int sum = 0;
+    for(int i=number;i>0;i--){
         sum += i;
     }
-
     return sum;
 }
