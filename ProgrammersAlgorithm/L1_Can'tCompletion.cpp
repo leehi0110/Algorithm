@@ -15,4 +15,5 @@ string solution(vector<string> participant, vector<string> completion) {
         if(participant[i] == completion[i]) continue;
         else return participant[i];
     }
+    
 }
