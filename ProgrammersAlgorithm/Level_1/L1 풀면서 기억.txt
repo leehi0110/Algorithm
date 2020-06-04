@@ -1,0 +1,62 @@
+유클리드호제법
+
+Greatest Common Divisor ( GCD )
+a, b의 최소공배수
+r = a%b
+b != 0 => a = b => b = r => r = a%b 반복
+b == 0 => a가 최대공약수
+
+Least Common multiple ( LCM )
+a, b 의 최대공약수
+    최대공약수 * 최소공배수 = a * b
+=>  최대공약수 = (a * b) / GCD(a,b)
+
+-------------------------------------------
+
+비트 연산자로 홀수 판별
+
+num & 1 ? "Odd" : "Even"
+홀 수는 xxx1 & 0001 => 0001 이기 때문에 1
+짝 수는 xxx0 & 0001 => 0000 이기 때문에 0
+
+--------------------------------------------
+
+#include <algorithm>
+max_element() & min_element()
+
+값이 아닌 주소를 반환해줌
+
+---------------------------------------------
+
+#include <cctype>
+tolower & toupper 사용가능
+
+#include <sstream>
+
+istringStream alias(string); <= 선언
+string bufferString; <= 선언
+
+
+while(getline(string, bufferString, delim))
+{
+  delim 을 기준으로 끊어서 버퍼 저장
+}
+
+----------------------------------------------
+
+#include <algorithm>
+
+sort (begin,end) => 기본이 오름차순
+sort (begin,end,compare)
+sort (begin, end, greater<자료형>()) => 내림차순
+sort (begin, end, less<자료형>()) => 오름차순
+
+-----------------------------------------------
+
+#include <cctype>
+
+isdigit('<char>문자') => return 0
+isdigit('<char>숫자') => return !0
+
+-----------------------------------------------
+

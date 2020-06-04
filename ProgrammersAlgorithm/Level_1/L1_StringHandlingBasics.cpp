@@ -14,5 +14,7 @@ bool solution(string s) {
     else return false;
 }
 
+// #include <cctype>
+
 // isdigit('<char>문자') => return 0
 // isdigit('<char>숫자') => return !0
