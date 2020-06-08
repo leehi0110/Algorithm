@@ -74,3 +74,9 @@ int index = find(STL.begin(),STL.end(),Element) - STL.begin()
 
 find 함수는 첫번째로 발견되는 반복자를 반환
 Element가 없을 경우 STL.end()를 반환
+
+------------------------------------------------
+
+#include <algorithm>
+
+reverse(vector.begin(),vector.end());
