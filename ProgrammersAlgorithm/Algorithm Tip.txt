@@ -46,6 +46,7 @@ while(getline(string, bufferString, delim))
 
 #include <algorithm>
 
+
 sort (begin,end) => 기본이 오름차순
 sort (begin,end,compare)
 sort (begin, end, greater<자료형>()) => 내림차순
@@ -92,5 +93,26 @@ string s = abcdefgh;
 s.substr(5) = fgh
 s.substr(0,5) = abcde
 
+------------------------------------------------
+
+#include <string>
+
+string num = "1234"
+int number = stoi(num);
+
+cout << number << endl;
+=> 결과는 int 1234
+
+-----------------------------------------------
+
+#include <string>
+
+string s = "123123";
+cout << s.find("123") << endl;
+
+=> 결과는 123이 처음으로 매칭되는 index 반환
+=> 매칭되지 않을 경우 -1 반환
+
+-----------------------------------------------
 
 
