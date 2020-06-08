@@ -80,3 +80,17 @@ Element가 없을 경우 STL.end()를 반환
 #include <algorithm>
 
 reverse(vector.begin(),vector.end());
+
+------------------------------------------------
+
+#include <string>
+
+string.substr(index,len) index ~ index+len
+
+string s = abcdefgh;
+
+s.substr(5) = fgh
+s.substr(0,5) = abcde
+
+
+
