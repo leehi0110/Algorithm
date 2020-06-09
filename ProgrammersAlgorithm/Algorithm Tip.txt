@@ -19,17 +19,52 @@ num & 1 ? "Odd" : "Even"
 홀 수는 xxx1 & 0001 => 0001 이기 때문에 1
 짝 수는 xxx0 & 0001 => 0000 이기 때문에 0
 
+=> 1 & 1 = 1 / 1 & 0 = 0
+=> 1 | 0 = 1 / 1 | 1 = 1
+=> 1 ^ 1 = 0 / 1 ^ 0 = 1 or 0 ^ 1 = 1
+------------------------------------------ 
+
+#include <bitset>
+
+string str = bitset<size_t>(val).to_string()
+
+str = binary val
+
 --------------------------------------------
 
 #include <algorithm>
-max_element() & min_element()
 
-값이 아닌 주소를 반환해줌
+=> max_element() & min_element()
+=> 값이 아닌 주소를 반환해줌
+
+=> sort (begin,end) => 기본이 오름차순
+=> sort (begin,end,compare)
+=> sort (begin, end, greater<자료형>()) => 내림차순
+=> sort (begin, end, less<자료형>()) => 오름차순
+
+=> iterator iter = find(STL.begin(),STL.end(),Element);
+=> int index = find(STL.begin(),STL.end(),Element) - STL.begin()
+=> find 함수는 첫번째로 발견되는 반복자를 반환
+=> Element가 없을 경우 STL.end()를 반환
+
+=> reverse(vector.begin(),vector.end());
+
+=> replace(STL.begin(),STL.end(),from,to);
+=> ex)   str = "12341234"
+=>       replace(str.begin(),str.end(),"1","2");
+=>       str = "22342234"
+
 
 ---------------------------------------------
 
 #include <cctype>
-tolower & toupper 사용가능
+
+=> tolower & toupper 사용가능
+
+=> isdigit('<char>문자') => return 0
+=> isdigit('<char>숫자') => return !0
+
+----------------------------------------------
 
 #include <sstream>
 
@@ -44,75 +79,28 @@ while(getline(string, bufferString, delim))
 
 ----------------------------------------------
 
-#include <algorithm>
-
-
-sort (begin,end) => 기본이 오름차순
-sort (begin,end,compare)
-sort (begin, end, greater<자료형>()) => 내림차순
-sort (begin, end, less<자료형>()) => 오름차순
-
------------------------------------------------
-
-#include <cctype>
-
-isdigit('<char>문자') => return 0
-isdigit('<char>숫자') => return !0
-
------------------------------------------------
-
 #include <numeric>
 
 result = accumulate(STL.begin(),STL.end(),init val);
 => long long result일 경우 init val에 0LL으로 해줘야 오류 x
 
------------------------------------------------
-
-#include <algorithm>
-
-iterator iter = find(STL.begin(),STL.end(),Element);
-int index = find(STL.begin(),STL.end(),Element) - STL.begin()
-
-find 함수는 첫번째로 발견되는 반복자를 반환
-Element가 없을 경우 STL.end()를 반환
-
-------------------------------------------------
-
-#include <algorithm>
-
-reverse(vector.begin(),vector.end());
-
 ------------------------------------------------
 
 #include <string>
 
-string.substr(index,len) index ~ index+len
-
-string s = abcdefgh;
-
-s.substr(5) = fgh
-s.substr(0,5) = abcde
-
-------------------------------------------------
-
-#include <string>
-
-string num = "1234"
-int number = stoi(num);
-
-cout << number << endl;
+=> string num = "1234"
+=> int number = stoi(num);
+=> cout << number << endl;
 => 결과는 int 1234
 
------------------------------------------------
-
-#include <string>
-
-string s = "123123";
-cout << s.find("123") << endl;
-
+=> string s = "123123";
+=> cout << s.find("123") << endl;
 => 결과는 123이 처음으로 매칭되는 index 반환
 => 매칭되지 않을 경우 -1 반환
 
+=> string.substr(index,len) index ~ index+len
+=> string s = abcdefgh;
+=> s.substr(5) = fgh
+=> s.substr(0,5) = abcde
+
 -----------------------------------------------
-
-
