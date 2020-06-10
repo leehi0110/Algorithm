@@ -68,14 +68,21 @@ str = binary val
 
 #include <sstream>
 
-istringStream alias(string); <= 선언
-string bufferString; <= 선언
+=> istringStream alias(string); <= 선언
+=> string bufferString; <= 선언
 
 
-while(getline(string, bufferString, delim))
-{
-  delim 을 기준으로 끊어서 버퍼 저장
-}
+=> while(getline(string, bufferString, delim))
+=> {
+=>   delim 을 기준으로 끊어서 버퍼 저장
+=> }
+
+=> ex1) str = "abcabc"
+=>      string = stringbuffer;
+=>      stringstream ss(str);
+=>      ss.get() // ss에서 가져올 차례의 요소를 가져옴
+=>      ss.unget() // 마지막에 가져온 것을 다시 ss에 넣음
+
 
 ----------------------------------------------
 
