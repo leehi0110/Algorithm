@@ -26,9 +26,8 @@ num & 1 ? "Odd" : "Even"
 
 #include <bitset>
 
-string str = bitset<size_t>(val).to_string()
-
-str = binary val
+=> string str = bitset<size_t>(val).to_string()
+=> str = binary val
 
 --------------------------------------------
 
