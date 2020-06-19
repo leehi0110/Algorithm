@@ -96,6 +96,11 @@ num & 1 ? "Odd" : "Even"
 =>      ss.get() // ss에서 가져올 차례의 요소를 가져옴
 =>      ss.unget() // 마지막에 가져온 것을 다시 ss에 넣음
 
+=> stringstream alias(string) <= 선언
+=> string buffer;
+=> while(!alias.eof()) // 더이상 버퍼에 값이 없을때 까지
+=> alias => buffer     // buffer로 받아와짐
+
 
 ----------------------------------------------
 
