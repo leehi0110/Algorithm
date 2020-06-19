@@ -63,6 +63,11 @@ num & 1 ? "Odd" : "Even"
 => std::transform(str.begin(),str.end(),str.begin(),::tolower);
 => str = "abcedf+"
 
+=> stl 내부의 중복 제거 함수 unique;
+=> 중복된 값을 stl 뒤에 쓰레기 값으로 추가해줌 / 따라서 중복제거를 한 뒤, 쓰레기 값들을 지워줘야함
+=> unique 함수가 종료되면 쓰레기 값의 시작점으로 iter 반환
+=> vector.erase(unique(vector.begin(),vector.end()),vector.end());
+
 ---------------------------------------------
 
 #include <cctype>
