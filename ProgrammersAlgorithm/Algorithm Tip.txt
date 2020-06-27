@@ -68,6 +68,15 @@ num & 1 ? "Odd" : "Even"
 => unique 함수가 종료되면 쓰레기 값의 시작점으로 iter 반환
 => vector.erase(unique(vector.begin(),vector.end()),vector.end());
 
+=> 합집합과 교집합을 구할 결과 stl의 초기 사이즈는 충분한 값으로 할당 돼 있어야됨
+=> 결과를 구한 뒤 iterator를 통하여 resize() 
+=> iter = set_union(stl1.begin(),stl1.end(),stl2.begin(),stl2.end(),result.begin());
+=> result.resize(iter-result.begin());
+// 합집합을 구하는 경우
+=> iter = set_intersection(stl1.begin(),stl1.end(),stl2.begin(),stl2.end(),result.begin());
+=> result.resize(iter-result.begin());
+// 교집합을 구하는 경우
+
 ---------------------------------------------
 
 #include <cctype>
