@@ -151,3 +151,23 @@ result = accumulate(STL.begin(),STL.end(),init val);
 => if (map.find(key) == map.end()) 해당 키가 없음
 
 => map.insert(pair<int,int>(key, val));
+
+-------------------------------------------------
+
+#include <set>
+
+=> set/multiset <data type> [변수 이름]
+=> ex> set<int> val; // 중복 값 불가
+=> ex> multiset<int> val; // 중복 값 허용
+=> ex> set<pair<int, string>> val // pair를 넣을 수 있음
+=> ex> set<int> val(pred); // pred를 정렬기준으로 삼을 수 있음
+
+=> 균형 이진트리 ( 중위 순회 ) // 오름 차순 자동 정렬
+
+=> [변수명].count(k) // k의 원소 개수 반환 // set에서는 0 || 1만 가능
+=> [변수명].insert(k) // 원소 k를 삽입
+=> [변수명].find(k) // k가 존재할경우 iterator 반환
+
+
+
+
