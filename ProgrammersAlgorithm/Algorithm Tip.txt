@@ -160,7 +160,7 @@ result = accumulate(STL.begin(),STL.end(),init val);
 => ex> set<int> val; // 중복 값 불가
 => ex> multiset<int> val; // 중복 값 허용
 => ex> set<pair<int, string>> val // pair를 넣을 수 있음
-=> ex> set<int> val(pred); // pred를 정렬기준으로 삼을 수 있음
+=> ex> set<int,greator<int>> val; // 내림차순 정렬
 
 => 균형 이진트리 ( 중위 순회 ) // 오름 차순 자동 정렬
 
