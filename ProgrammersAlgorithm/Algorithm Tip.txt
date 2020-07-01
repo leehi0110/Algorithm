@@ -147,6 +147,11 @@ result = accumulate(STL.begin(),STL.end(),init val);
 => map <[Data type1],[Data type2]> [변수 이름]
 => ex) map<int, int> intMap;
 
+=> map 선언시 소트 하는법
+=> 기본은 data type1 기준으로 오름차순
+=> map <[Data type1],[Data type2],greater<Data type1>> [변수이름]
+=> greater로 내림 차순 정렬 가능
+
 => map.find(keyVal)
 => if (map.find(key) == map.end()) 해당 키가 없음
 
