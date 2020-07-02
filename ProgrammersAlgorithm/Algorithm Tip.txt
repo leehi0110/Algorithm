@@ -173,6 +173,11 @@ result = accumulate(STL.begin(),STL.end(),init val);
 => [변수명].insert(k) // 원소 k를 삽입
 => [변수명].find(k) // k가 존재할경우 iterator 반환
 
+--------------------------------------------------
 
+#include <queue>
 
-
+=> 우선순위 큐를 사용할 경우
+=> priority_queue <[Data Type]> [변수이름]
+=> pop(), push(), empty(), size(), top() 사용가능
+=> pop은 제거만 / top은 참조만
