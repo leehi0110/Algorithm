@@ -8,47 +8,52 @@
 #include <map>
 
 using namespace std;
-int recur_conference(int start_time, multimap<int,int>::iterator &iter, multimap<int,int> &time_table);
+long long check_next_conference(int start_time,multimap <int,int> &time_table,multimap <int,int>::iterator &iter);
 
 int main()
 {
-    int conference_num;
-    int max_conference = 0;
-    multimap <int,int> time_table;
+    long long conference_num;
+    long long max_conference = 0;
+    multimap <int, int> time_table;
     multimap <int,int>::iterator iter;
 
     cin >> conference_num;
 
-    for(int i=0;i<conference_num;i++){
+    while(conference_num--){
         int start_time, end_time;
+
         cin >> start_time >> end_time;
 
         time_table.insert(pair<int,int>(start_time,end_time));
     }
 
     for(iter = time_table.begin();iter != time_table.end();iter++){
-        int check_conference = 1;
-        check_conference += recur_conference(iter->second,iter,time_table);
+        cout << iter->first << " " << iter->second << endl;
+    }
 
-        if(max_conference < check_conference) max_conference = check_conference;
+    for(iter = time_table.begin();iter != time_table.end();iter++){
+        long long conference_num;
+
+        conference_num = 1 + check_next_conference(iter->second,time_table,iter);
+        if(max_conference < conference_num) max_conference = conference_num;
     }
 
     cout << max_conference << endl;
 }
 
-int recur_conference(int start_time, multimap<int,int>::iterator &iter, multimap<int,int> &time_table)
+long long check_next_conference(int start_time,multimap <int,int> &time_table,multimap <int,int>::iterator &iter)
 {
-    cout << " now start_time << " << start_time << endl;
-    int check_conference = 0;
-    for(iter;iter != time_table.end();iter++){
-        if(iter->first >= start_time) {
-            cout << "next start time = " << iter->first << endl;
-            int tmp = 1 + recur_conference(iter->second,iter,time_table);
-            if(check_conference > tmp) {
-                check_conference = tmp;
-            }
+    multimap <int,int>::iterator start_iter = iter;
+    long long max_conference = 0;
+
+    start_iter++;
+    for(;start_iter != time_table.end();start_iter++){
+        long long conference_num = 0;
+        if(start_iter->first >= start_time){
+            conference_num = 1 + check_next_conference(start_iter->second,time_table,start_iter);
+            if(max_conference < conference_num) max_conference = conference_num;
         }
-        return check_conference;
     }
-    return 0;
+    
+    return max_conference;
 }
