@@ -53,9 +53,12 @@ int main()
         }
     }
 
-    string first = oper[0] + number[0];
-    string second = oper[1] + number[1];
+    if(number.size() == 1) cout << stoi(oper[0] + number[0]);
+    else {
+        string first = oper[0] + number[0];
+        string second = oper[1] + number[1];
 
-    cout << stoi(first) + stoi(second) << endl;
+        cout << stoi(first) + stoi(second) << endl;
+    }
 
 }
