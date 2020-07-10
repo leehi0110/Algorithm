@@ -5,22 +5,28 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <set>
 
 using namespace std;
 
 int main()
 {
-    // ios_base :: sync_with_stdio(false);
-    // cin.tie(NULL);
-    
     int n;
+    set <int> sort_stl;
 
     cin >> n;
 
-    vector <int> arr(n);
+    while(n--){
+        int val;
 
-    for(int i=0;i<n;i++){
-        cin >> arr[i];
+        cin >> val;
+        sort_stl.insert(val);
+    }
+
+    set <int>::iterator iter;
+
+    for(iter = sort_stl.begin();iter != sort_stl.end();iter++){
+        cout << *iter << "\n";
     }
 
 }
