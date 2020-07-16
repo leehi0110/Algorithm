@@ -181,3 +181,12 @@ result = accumulate(STL.begin(),STL.end(),init val);
 => priority_queue <[Data Type]> [변수이름]
 => pop(), push(), empty(), size(), top() 사용가능
 => pop은 제거만 / top은 참조만
+
+--------------------------------------------------
+
+#include <deque>
+
+=> vector container를 보완하기 위한 stl container
+=> deque <[data type]> [변수이름]
+=> deque 내장함수를 이용하여 데이터 처리 가능
+=> push_back , push_front, empty, front , back
