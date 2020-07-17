@@ -77,6 +77,9 @@ num & 1 ? "Odd" : "Even"
 => result.resize(iter-result.begin());
 // 교집합을 구하는 경우
 
+=> lower_bound(value) : value보다 작지 않은 최초의 원소의 iter 반환
+=> upper_bound(value) : value보다 큰 최초의 원소의 iter 반환
+
 ---------------------------------------------
 
 #include <cctype>
