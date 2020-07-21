@@ -17,130 +17,60 @@ int main()
   cin >> test_case;
 
   while(test_case--){
-    string cmd, array;
-    string result = "";
-    int number_element = 0;
-    int n, delete_cnt=0, back_cnt=0;
-    
-    cin >> cmd >> n >> array;
+    string cmd, array_string, number = "";
+    int array_size;
+    bool reverse = false;
+    deque <int> array;
 
+    cin >> cmd >> array_size >> array_string;
+
+    if(array_size != 0){
+      for(int i=1;i<array_string.length();i++){
+       if(isdigit(array_string[i])){
+          number += array_string[i];
+        }
+        else {
+         array.push_back(stoi(number));
+         number = "";
+        }
+      }
+    }
+    number = "";
     for(int i=0;i<cmd.length();i++){
-      if(cmd[i] == 'R') back_cnt++;
-      else delete_cnt++;
-    }
-
-    if(delete_cnt > n) {
-      cout << "error" << endl;
-      continue;
-    }
-
-    deque <int> number;
-
-    for(int i=1;i<array.length();i++){
-      if(isdigit(array[i])){
-        number_element *= 10;
-        number_element += array[i]- '0';
+      if(cmd[i] == 'R'){
+        reverse = !reverse;
       }
       else {
-        number.push_back(number_element);
-        number_element = 0;
+        if(array.empty()) {
+          number = "error";
+          break;
+        }
+        else if(reverse){
+          array.pop_back();
+        }
+        else array.pop_front();
       }
     }
 
-    result += '[';
-    if(back_cnt%2 == 0) {
-      for(int i=0;i<delete_cnt;i++){
-        number.pop_front();
-      }
-      for(int i=0;i<number.size();i++){
-        result += to_string(number[i]);
-        if(i != number.size()-1){
-          result += ',';
+    if(!number.length()){
+      number = '[';
+      if(!reverse){
+        for(int i=0;i<array.size();i++){
+          number += to_string(array[i]);
+          if(i != array.size()-1) number += ',';
         }
-      }
-    }
-    else {
-      for(int i=0;i<delete_cnt;i++){
-        number.pop_back();
-      }
-      for(int i=number.size()-1;i>=0;i--){
-        result += to_string(number[i]);
-        if(i != 0){
-          result += ',';
+        number += ']';
+      }// 정방향
+      else {
+        for(int i=array.size()-1;i>=0;i--){
+          number += to_string(array[i]);
+          if(i != 0) number += ',';
         }
-      }
+        number += ']';
+      } // 역방향
     }
-    result += ']'; 
-    cout << result << endl;
+    
+    cout << number << "\n";
   }
+
 }
-
-// int main()
-// {
-//   int testCase;
-//   int n;
-//   char val;
-//   bool isReverse;
-//   string cmd;
-
-//   deque <char> array;
-//   deque <char> ::iterator iter;
-
-//   cin >> testCase;
-
-//   for(int i=0;i<testCase;i++){
-//     cin >> cmd;
-//     cin >> n;
-
-//     val = ' ';
-//     isReverse = false;
-//     array.clear();
-
-//     while(val != ']'){
-//       cin >> val;
-//       array.push_back(val);
-//     }
-
-//     for(int j=0;j<cmd.length();j++){
-//       if(cmd[j] == 'R'){
-//         isReverse = !isReverse;
-//       }
-//       else { // cmd[j] == 'D'
-//         if(array.size() == 2){
-//           cout << "error" << endl;
-//           break;
-//         }
-//         else {
-//           if(isReverse){
-//             iter = array.end() - 2;
-//             array.erase(iter);
-//             iter --;
-//             array.erase(iter);
-//           }
-//           else {
-//             iter = array.begin() + 1;
-//             array.erase(iter);
-//             iter ++;
-//             array.erase(iter);
-//           }
-//         }
-//       }
-
-//       if(j+1 == cmd.length()){
-//         if(isReverse){
-//           cout << '[';
-//           for(int k=array.size()-2;k>0;k--){
-//             cout << array[k];
-//           }
-//           cout << ']' << endl;
-//         }
-//         else {
-//           for(int k=0;k<array.size();k++){
-//             cout << array[k];
-//           }
-//           cout << "\n";
-//         }
-//       }
-//     }
-//   }
-// }
