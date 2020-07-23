@@ -39,12 +39,4 @@ int main()
         bag_info.insert(bag_weight);
     }
 
-    sort(gem_info.begin(),gem_info.end());
-
-    vector <pair<int,int>>::iterator gem_iter;
-    // multiset <int>::iterator bag_iter;
-
-    for(gem_iter = gem_info.begin();gem_iter != gem_info.end();gem_iter++){
-        cout << gem_iter->first << " " << gem_iter->second << endl;
-    }
 }
