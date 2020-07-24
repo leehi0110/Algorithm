@@ -44,3 +44,6 @@ int main()
 
     cout << tape_cnt << endl;
 }
+
+//5 3
+// 1 2 3 4 100 2000
