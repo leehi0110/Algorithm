@@ -28,6 +28,8 @@ int main()
         cin >> leak_site[i];
     }
 
+    sort(leak_site.begin(),leak_site.end());
+
     for(int i=0;i<leak_cnt;i++){
         tape_cover = leak_site[i] - 0.5 + tape_length;
 
