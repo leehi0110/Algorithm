@@ -24,5 +24,12 @@ int main()
         cin >> number[i];
     }
 
-    
+    for(int i=0;i<number.size();i++){
+        
+    }
+}
+
+int next_sum()
+{
+
 }
