@@ -4,5 +4,5 @@
 # txt 파일을 무시
 *.txt
 
-# test.out.dSYM 폴더 무시
-test.out.dSYM/
+# .dSYM 폴더 무시
+*.dSYM
