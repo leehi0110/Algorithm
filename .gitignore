@@ -1,0 +1,8 @@
+# 모든 확장자 .out 파일을 무시
+*.out
+
+# txt 파일을 무시
+*.txt
+
+# test.out.dSYM 폴더 무시
+test.out.dSYM/
