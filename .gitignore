@@ -6,3 +6,10 @@
 
 # .dSYM 폴더 무시
 *.dSYM
+
+# .json 파일 무시
+
+*.json
+
+# node_modules
+node_modules/
