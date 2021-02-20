@@ -113,5 +113,4 @@ while (1) {
     console.log("After Direction Change ", nowDirection);
   }
   console.log("now Snake = ", snake);
-  console.log("-----------------");
 }
