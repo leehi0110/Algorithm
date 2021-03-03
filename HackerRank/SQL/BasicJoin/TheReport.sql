@@ -1,4 +1,10 @@
+-- Oracle
 SELECT (CASE WHEN g.GRADE < 8 THEN 'NULL' ELSE s.NAME END), g.GRADE, s.MARKS
 FROM STUDENTS s, GRADES g
 WHERE s.MARKS BETWEEN g.MIN_MARK AND g.MAX_MARK
 ORDER BY g.GRADE DESC, s.NAME; 
+-- MySQL
+SELECT IF(g.grade < 8,'NULL', s.NAME), g.grade, s.marks
+FROM Students s INNER JOIN Grades g
+WHERE s.Marks BETWEEN g.Min_Mark AND g.Max_Mark
+ORDER BY g.grade DESC, s.NAME, s.Marks;
