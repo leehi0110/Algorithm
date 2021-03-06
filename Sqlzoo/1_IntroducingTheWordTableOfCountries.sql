@@ -1,0 +1,3 @@
+SELECT POPULATION
+FROM world
+WHERE NAME = 'Germany';
