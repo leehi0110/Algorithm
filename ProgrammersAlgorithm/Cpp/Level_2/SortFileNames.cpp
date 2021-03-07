@@ -1,73 +1,82 @@
-#include <iostream>
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <string>
 #include <cctype>
+#include <iostream>
 
 using namespace std;
 
-bool comp(string a, string b) {
-    string aHead = "", aNumber = "", aTail = "";
-    string bHead = "", bNumber = "", bTail = "";
-    
-    int flag = 0;
-    string subStr = "";
-    
-    for(int i=0;i<a.length();i++) {
-        
-        if(isdigit(a[i]) && flag == 0) {
-            flag = 1;
-            aHead = subStr;
-            subStr = a[i];
-        } else if(!isdigit(a[i]) && flag == 1) {
-            flag = 2;
-            aNumber = subStr;
-            subStr = a[i];
-        } else {
-            subStr += a[i];
+bool comp(vector<string> a, vector<string> b)
+{
+    transform(a[1].begin(), a[1].end(), a[1].begin(), ::toupper);
+    transform(b[1].begin(), b[1].end(), b[1].begin(), ::toupper);
+
+    if (a[1] == b[1])
+    {
+        if (stoi(a[2]) == stoi(b[2]))
+        {
+            return stoi(a[0]) < stoi(b[0]);
         }
-        
-        if(i == a.length()-1) aTail = subStr;
-    }
-
-    flag = 0;
-    subStr = "";
-    
-    for(int i=0;i<b.length();i++) {
-        
-        if(isdigit(b[i]) && flag == 0) {
-            flag = 1;
-            bHead = subStr;
-            subStr = b[i];
-        } else if(!isdigit(b[i]) && flag == 1) {
-            flag = 2;
-            bNumber = subStr;
-            subStr = b[i];
-        } else {
-            subStr += b[i];
+        else
+        {
+            return stoi(a[2]) < stoi(b[2]);
         }
-        
-        if(i == b.length()-1) bTail = subStr;
     }
-
-    transform(aHead.begin(), aHead.end(), aHead.begin(),::toupper);
-    transform(bHead.begin(), bHead.end(), bHead.begin(),::toupper);
-    int intANumber = stoi(aNumber);
-    int intBNumber = stoi(bNumber);
-
-    if(aHead == bHead) {
-        if(intANumber > intBNumber) return false;
-        else return true;
-    } else if(aHead > bHead) return false;
-    else return true;
+    else
+    {
+        return a[1] < b[1];
+    }
 }
 
-vector<string> solution(vector<string> files) {
-    stable_sort(files.begin(),files.end(), comp);
+vector<string> solution(vector<string> files)
+{
+    vector<string> answer;
+    vector<vector<string>> vec;
 
-    for(auto file : files) {
-        cout << file << " ";
+    for (int i = 0; i < files.size(); i++)
+    {
+        vector<string> temp;
+        string file = files[i];
+        string sub = "";
+        int flag = 0;
+
+        temp.push_back(to_string(i)); // 몇 번째 파일인지 저장
+
+        for (int j = 0; j < file.length(); j++)
+        {
+
+            if (flag == 1 && !isdigit(file[j]))
+            {
+                temp.push_back(sub);
+                break;
+            }
+            else if (isdigit(file[j]) && flag == 0)
+            {
+                temp.push_back(sub);
+                sub = file[j];
+                flag = 1;
+            }
+            else
+            {
+                sub += file[j];
+            }
+
+            if (j == file.length() - 1)
+                temp.push_back(sub);
+        }
+
+        vec.push_back(temp);
     }
-    cout << endl;
-    return files;
+
+    stable_sort(vec.begin(), vec.end(), comp);
+
+    for (int i = 0; i < vec.size(); i++)
+    {
+        int idx = stoi(vec[i][0]);
+
+        answer.push_back(files[idx]);
+    }
+
+    return answer;
 }
