@@ -34,18 +34,16 @@ int solution(vector<vector<int>> land)
   {
     for (int j = 0; j < 4; j++)
     {
-      int maxValue = getMax(land[i - 1], j);
+      int maxValue = getMax(dp[i - 1], j);
       dp[i][j] = land[i][j] + maxValue;
     }
   }
 
-  for (int i = 0; i < dp.size(); i++)
+  for (int i = 0; i < 4; i++)
   {
-    for (int j = 0; j < dp[i].size(); j++)
-    {
-      cout << dp[i][j] << " ";
-    }
-    cout << endl;
+    int temp = dp[land.size() - 1][i];
+    if (temp > answer)
+      answer = temp;
   }
 
   return answer;
