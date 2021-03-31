@@ -13,7 +13,7 @@ using namespace std;
 int N, E;
 int firstVertex, secondVertex;
 
-void dijkstra(vector<vector<pair<int, int>>> graph, int start, int end, int &result);
+// void dijkstra(vector<vector<pair<int, int>>> graph, int start, int end, int &result);
 int main()
 {
   ios_base ::sync_with_stdio(false);
