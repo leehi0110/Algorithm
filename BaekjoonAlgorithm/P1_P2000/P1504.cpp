@@ -1,79 +1,139 @@
-// ProblemNumber || ProblemName : 1504 - 특정한 최단 경로
+// ProblemNumber || ProblemName : P1504 - 특정한 최단경로
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <utility>
-#include <queue>
 #define INF 1e9
-
 using namespace std;
 
-int N, E;
-int firstVertex, secondVertex;
-
-// void dijkstra(vector<vector<pair<int, int>>> graph, int start, int end, int &result);
+// long long INF = 987654321;
+long long table[801][801];
 int main()
 {
   ios_base ::sync_with_stdio(false);
   cin.tie(NULL);
 
-  cin >> N >> E;
+  int n, e;
+  int firstStop, secondStop;
 
-  vector<vector<pair<int, int>>> graph(N + 1);
-  vector<vector<int>> table(N + 1, vector<int>(N + 1, INF));
+  cin >> n >> e;
 
-  for (int i = 0; i < table.size(); i++)
+  for (int i = 1; i <= n; i++)
   {
-    for (int j = 0l; j < table.size(); j++)
+    for (int j = 1; j <= n; j++)
     {
       if (i == j)
         table[i][j] = 0;
+      else
+        table[i][j] = INF;
     }
   }
 
-  for (int i = 0; i < E; i++)
+  for (int i = 0; i < e; i++)
   {
-    int a, b, c;
+    int start, end, cost;
 
-    cin >> a >> b >> c;
-    graph[a].push_back({b, c});
-    graph[b].push_back({a, c});
+    cin >> start >> end >> cost;
 
-    table[a][b] = c;
-    table[b][a] = c;
+    table[start][end] = cost;
+    table[end][start] = cost;
   }
 
-  for (int k = 1; k < N + 1; k++)
+  for (int k = 1; k <= n; k++)
   {
-    for (int i = 1; i < N + 1; i++)
+    for (int i = 1; i <= n; i++)
     {
-      for (int j = 1; j < N + 1; j++)
+      for (int j = 1; j <= n; j++)
       {
+        if (i == j)
+          continue;
         table[i][j] = min(table[i][j], table[i][k] + table[k][j]);
-        table[j][i] = table[i][j];
       }
     }
   }
 
-  cin >> firstVertex >> secondVertex;
+  cin >> firstStop >> secondStop;
 
-  int first_result = table[1][firstVertex] + table[firstVertex][secondVertex] + table[secondVertex][N];
-  int second_result = table[1][secondVertex] + table[secondVertex][firstVertex] + table[firstVertex][N];
+  long long result = min(table[1][firstStop] + table[firstStop][secondStop] + table[secondStop][n], table[1][secondStop] + table[secondStop][firstStop] + table[firstStop][n]);
 
-  if (first_result < second_result)
-  {
-    if (first_result == INF)
-      cout << -1 << endl;
-    else
-      cout << first_result << endl;
-  }
+  if (result >= INF)
+    cout << -1 << endl;
   else
-  {
-    if (second_result == INF)
-      cout << -1 << endl;
-    else
-      cout << second_result << endl;
-  }
+    cout << result << endl;
 }
+
+// int vertexNum, edgeNum;
+// int firstStop, secondStop;
+// int PriorityQueDijkstra(vector<vector<pair<int, int>>> graph, int start, int end);
+
+// int main()
+// {
+//   ios_base ::sync_with_stdio(false);
+//   cin.tie(NULL);
+
+//   cin >> vertexNum >> edgeNum;
+
+//   vector<vector<pair<int, int>>> graph(vertexNum + 1);
+
+//   for (int i = 0; i < edgeNum; i++)
+//   {
+//     int start, end, cost;
+
+//     cin >> start >> end >> cost;
+
+//     graph[start].push_back({end, cost});
+//     graph[end].push_back({start, cost});
+
+//   } // 간선정보 입력
+
+//   cin >> firstStop >> secondStop; // 경유지 입력
+
+//   int firstResult = PriorityQueDijkstra(graph, 1, firstStop) + PriorityQueDijkstra(graph, firstStop, secondStop) + PriorityQueDijkstra(graph, secondStop, vertexNum);
+
+//   int secondResult = PriorityQueDijkstra(graph, 1, secondStop) + PriorityQueDijkstra(graph, secondStop, firstStop) + PriorityQueDijkstra(graph, firstStop, vertexNum);
+
+//   if (firstResult == INF && secondResult == INF)
+//     cout << -1 << endl;
+//   else
+//   {
+//     if (firstResult > secondResult)
+//       cout << secondResult << endl;
+//     else
+//       cout << firstResult << endl;
+//   }
+// }
+
+// int PriorityQueDijkstra(vector<vector<pair<int, int>>> graph, int start, int end)
+// {
+//   vector<int> distance(vertexNum + 1, INF);
+//   priority_queue<pair<int, int>> pq;
+
+//   pq.push({0, start});
+//   distance[start] = 0;
+
+//   while (!pq.empty())
+//   {
+
+//     int dis = -pq.top().first;
+//     int des = pq.top().second;
+
+//     pq.pop();
+
+//     if (distance[des] < dis)
+//       continue;
+
+//     for (int i = 0; i < graph[des].size(); i++)
+//     {
+//       int cost = dis + graph[des][i].second;
+
+//       if (cost < distance[graph[des][i].first])
+//       {
+//         distance[graph[des][i].first] = cost;
+//         pq.push({-cost, graph[des][i].first});
+//       }
+//     }
+//   }
+
+//   return distance[end];
+// }
