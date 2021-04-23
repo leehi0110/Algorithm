@@ -8,19 +8,23 @@
 #include <utility>
 
 using namespace std;
-void dijkstra(vector<int> &distance, vector<vector<pair<int, int>>> &graph);
 
 int main()
 {
-  ios_base ::sync_with_stdio(false);
+  ios_base::sync_with_stdio(false);
   cin.tie(NULL);
 
   int n, d;
 
   cin >> n >> d;
 
-  vector<int> distance(d + 1);
+  vector<int> distance(d + 1, 0);
   vector<vector<pair<int, int>>> graph(d + 1);
+
+  for (int i = 0; i <= d; i++)
+  {
+    distance[i] = i;
+  }
 
   for (int i = 0; i < n; i++)
   {
@@ -28,9 +32,9 @@ int main()
 
     cin >> start >> end >> cost;
 
-    if (end > d)
+    if (end - start <= cost)
       continue;
-    else if (end - start <= cost)
+    else if (end > d)
       continue;
     else
     {
@@ -40,41 +44,29 @@ int main()
 
   for (int i = 0; i <= d; i++)
   {
-    distance[i] = i;
-    graph[i].push_back({i + 1, 1});
-  }
+    int before;
 
-  dijkstra(distance, graph);
+    if (i == 0)
+      before = -1;
+    else
+      before = distance[i - 1];
 
-  cout << distance[d] << endl;
-}
+    distance[i] = min(before + 1, distance[i]);
 
-void dijkstra(vector<int> &distance, vector<vector<pair<int, int>>> &graph)
-{
-  priority_queue<pair<int, int>> pq;
-
-  pq.push({0, 0});
-
-  while (!pq.empty())
-  {
-    int cost = -pq.top().first;
-    int here = pq.top().second;
-
-    pq.pop();
-
-    if (distance[here] < cost)
-      continue;
-
-    for (int i = 0; i < graph[here].size(); i++)
+    if (!graph[i].empty())
     {
-      int next = graph[here][i].first;
-      int nextDistance = cost + graph[here][i].second;
-
-      if (distance[next] > nextDistance)
+      for (int j = 0; j < graph[i].size(); j++)
       {
-        distance[next] = nextDistance;
-        pq.push({-nextDistance, next});
+        int next = graph[i][j].first;
+        int nextCost = graph[i][j].second;
+
+        if (distance[i] + nextCost < distance[next])
+        {
+          distance[next] = distance[i] + nextCost;
+        }
       }
     }
   }
+
+  cout << distance[d] << endl;
 }
