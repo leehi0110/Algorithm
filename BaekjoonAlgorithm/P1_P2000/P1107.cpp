@@ -67,12 +67,4 @@ int main()
   {
     cout << "Now i : " << i << " " << channel[i] << endl;
   }
-
-  // for (int i = 499900; i < 500001; i++)
-  // {
-  //   cout << channel[i] << " ";
-  // }
-  // cout << endl;
-
-  // cout << channel[target] << endl;
 }
