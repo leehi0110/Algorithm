@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
@@ -13,25 +14,48 @@ int main()
   cin.tie(NULL);
 
   int n;
-  vector<long long> target;
+  vector<int> vec;
+  vector<int> dup;
 
   cin >> n;
 
   for (int i = 0; i < n; i++)
   {
-    long long num;
-    cin >> num;
-    target.push_back(num);
-  }
-  vector<long long> dup = target;
-  sort(dup.begin(), dup.end());
+    int num;
 
+    cin >> num;
+    vec.push_back(num);
+    dup.push_back(num);
+  }
+
+  sort(dup.begin(), dup.end());
   dup.erase(unique(dup.begin(), dup.end()), dup.end());
 
-  for (int i = 0; i < target.size(); i++)
+  for (int i = 0; i < vec.size(); i++)
   {
-    int cnt = find(dup.begin(), dup.end(), target[i]) - dup.begin();
-    cout << cnt << " ";
+    int target = vec[i];
+    int left = 0;
+    int rigth = dup.size();
+    int mid = (left + rigth) / 2;
+
+    while (1)
+    {
+      if (dup[mid] > target)
+      {
+        rigth = mid;
+        mid = (left + rigth) / 2;
+      }
+      else if (dup[mid] < target)
+      {
+        left = mid;
+        mid = (left + rigth) / 2;
+      }
+      else
+      {
+        cout << mid << " ";
+        break;
+      }
+    }
   }
-  cout << "\n";
+  cout << endl;
 }
