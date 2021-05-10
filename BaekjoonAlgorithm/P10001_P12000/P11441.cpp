@@ -36,8 +36,8 @@ int main()
     cin >> start >> end;
 
     if (start > 1)
-      cout << vec[end - 1] - vec[start - 2] << endl;
+      cout << vec[end - 1] - vec[start - 2] << "\n";
     else
-      cout << vec[end - 1] << endl;
+      cout << vec[end - 1] << "\n";
   }
 }
