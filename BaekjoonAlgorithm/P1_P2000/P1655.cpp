@@ -1,49 +1,61 @@
-// Baekjoon 1655
-// 문제
-// 가운데를 말해요
+// ProblemNumber || ProblemName : P1655 - 가운데를 말해요
 
 #include <iostream>
-#include <vector>
 #include <string>
-#include <queue>
+#include <vector>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 
 int main()
 {
-    ios_base :: sync_with_stdio(false);
+    ios_base ::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    priority_queue <int,vector<int>> max_heap;
-    priority_queue <int,vector<int>,greater<int>> min_heap;
+
+    priority_queue<int> left;
+    priority_queue<int> right;
 
     int n;
 
     cin >> n;
 
-    while(n--){
-        int temp;
-        cin >> temp;
+    for (int i = 1; i <= n; i++)
+    {
+        int num;
 
-        if(max_heap.size() == min_heap.size()){
-            max_heap.push(temp);
+        cin >> num;
+
+        if (i == 1)
+        {
+            left.push(num);
         }
-        else {
-            min_heap.push(temp);
+        else if (i % 2 == 0)
+        { // 짝수 일때
+            if (num < left.top())
+            {
+                right.push(-1 * left.top());
+                left.pop();
+                left.push(num);
+            }
+            else
+            {
+                right.push(-1 * num);
+            }
         }
-
-        if(!min_heap.empty() && max_heap.top() > min_heap.top()) {
-            int go_to_max_heap = min_heap.top();
-            int go_to_min_heap = max_heap.top();
-
-            min_heap.pop();
-            max_heap.pop();
-
-            min_heap.push(go_to_min_heap);
-            max_heap.push(go_to_max_heap);
+        else
+        { // 홀수 일때
+            if (num > -1 * right.top())
+            {
+                left.push(-1 * right.top());
+                right.pop();
+                right.push(-1 * num);
+            }
+            else
+            {
+                left.push(num);
+            }
         }
-
-        cout << max_heap.top() << endl;
+        cout << left.top() << "\n";
     }
 }
