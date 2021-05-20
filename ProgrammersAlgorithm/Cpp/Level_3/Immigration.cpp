@@ -8,39 +8,37 @@ using namespace std;
 
 long long solution(int n, vector<int> times)
 {
-  long long answer = INF;
+  int test = 0;
 
   sort(times.begin(), times.end());
-  long long left = 0;
-  long long right = times[times.size() - 1] * n;
-  long long mid = (left + right) / 2;
+  long long left = 1;
+  long long right = static_cast<long long>(times[times.size() - 1]) * n;
+  long long mid;
+  long long answer = right;
 
-  while (left != mid)
+  while (left <= right)
   {
-    int validNum = 0;
+    int person = 0;
+    mid = (left + right) / 2;
 
     for (int i = 0; i < times.size(); i++)
     {
-      validNum += mid / times[i];
+      person += mid / static_cast<long long>(times[i]);
     }
 
-    if (validNum < n)
+    if (person < n)
     {
-      left = mid;
+      left = mid + 1;
     }
-    else if (validNum > n)
+    else // person > n && person == n
     {
-      right = mid;
-    }
-    else
-    { // validNum == n
       if (answer > mid)
+      {
         answer = mid;
+      }
 
-      right = mid;
+      right = mid - 1;
     }
-
-    mid = (left + right) / 2;
   }
 
   return answer;
@@ -49,12 +47,10 @@ long long solution(int n, vector<int> times)
 int main()
 {
   long long result = solution(6, {7, 10});
+  // long long result = solution(3, {1, 2, 3, 4, 5});
+  // long long result = solution(3, {1, 1, 1});
+  // long long result = solution(3, {1, 2, 3});
+  // long long result = solution(2, {1, 2, 2, 2, 100});
+
   cout << result << endl;
 }
-
-// n = 6
-// 0 35 70 => 6 + 3 = 9
-// 0 17 35 => 2 + 1 = 3
-// 17 26 35 => 3 + 2 = 5
-// 26 30 35 => 4 + 3 = 7
-// 26 28 30 => 4 + 2 = 6
