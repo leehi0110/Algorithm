@@ -18,7 +18,7 @@ long long solution(int n, vector<int> times)
 
   while (left <= right)
   {
-    int person = 0;
+    long person = 0;
     mid = (left + right) / 2;
 
     for (int i = 0; i < times.size(); i++)
