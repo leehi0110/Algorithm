@@ -1,42 +1,79 @@
-// Baekjoon 1202
-// 문제
-// 그리디
-// 보석 도둑
+// ProblemNumber || ProblemName : P1202 - 보석 도둑
+// 하면서 좀 더 깊게 생각하게 된 것들
+// ->
 
 #include <iostream>
-#include <vector>
 #include <string>
-#include <set>
-#include <utility>
+#include <vector>
 #include <algorithm>
+#include <utility>
+#include <queue>
 
 using namespace std;
 
 int main()
 {
-    ios_base :: sync_with_stdio(false);
+    ios_base ::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    int gem_cnt, bag_cnt;
-    int total_price = 0;
-    vector <pair<int,int>> gem_info;
-    multiset <int> bag_info;
 
-    cin >> gem_cnt >> bag_cnt;
+    int n, k;
+    int result = 0;
+    priority_queue<pair<int, int>> gem;
+    vector<int> bag;
 
-    for(int i=0;i<gem_cnt;i++){
-        int gem_weight, gem_price;
+    cin >> n >> k;
 
-        cin >> gem_weight >> gem_price;
+    for (int i = 0; i < n; i++)
+    {
+        int weight, value;
 
-        gem_info.push_back(pair<int,int>(gem_price,gem_weight));
+        cin >> weight >> value;
+
+        gem.push({value, weight});
     }
 
-    for(int i=0;i<bag_cnt;i++){
-        int bag_weight;
+    for (int i = 0; i < k; i++)
+    {
+        int weight;
 
-        cin >> bag_weight;
-        bag_info.insert(bag_weight);
+        cin >> weight;
+
+        bag.push_back(weight);
     }
 
+    sort(bag.begin(), bag.end());
+
+    while (!gem.empty())
+    {
+        int value = gem.top().first;
+        int weight = gem.top().second;
+
+        gem.pop();
+
+        for (int j = 0; j < bag.size(); j++)
+        {
+            if (bag[j] >= weight)
+            {
+                result += value;
+                bag.erase(bag.begin() + j);
+                break;
+            }
+        }
+    }
+
+    cout << result << endl;
 }
+
+// 3 2
+// 1 65
+// 5 23
+// 2 99
+// 10
+// 2
+
+// 3 2
+// 5 97
+// 4 98
+// 5 99
+// 5
+// 4
