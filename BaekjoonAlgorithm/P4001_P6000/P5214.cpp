@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <set>
 #include <queue>
 #include <utility>
 #define INF 1e9
@@ -21,64 +20,48 @@ int main()
   int n, k, m;
 
   cin >> n >> k >> m;
-
-  vector<set<int>> graph(n + 1);
+  vector<vector<int>> station(n + m + 1);
   vector<int> dist(n + 1, INF);
-  queue<int> que;
-  vector<bool> visit(n + 1, false);
+  priority_queue<pair<int, int>> pq;
 
-  for (int i = 0; i < m; i++)
+  for (int i = 1; i <= m; i++)
   {
-    vector<int> temp;
-
     for (int j = 0; j < k; j++)
     {
-      int station;
-      cin >> station;
-      temp.push_back(station);
-    }
-
-    for (int j = 0; j < temp.size(); j++)
-    {
-      for (int k = j + 1; k < temp.size(); k++)
-      {
-        graph[temp[j]].insert(temp[k]);
-        graph[temp[k]].insert(temp[j]);
-      }
+      int temp;
+      cin >> temp;
+      station[temp].push_back(i + n);
+      station[i + n].push_back(temp);
     }
   }
 
   dist[1] = 1;
-  que.push(1);
-  // que.push({1, 1});
+  pq.push({-1, 1});
 
-  while (!que.empty())
+  while (!pq.empty())
   {
-    // int now = que.front().first;
-    // int drop = que.front().second;
-    int now = que.front();
 
-    que.pop();
+    int dis = -pq.top().first;
+    int now = pq.top().second;
 
-    // if (dist[now] < drop)
-    visit[now] = true;
-    //   continue;
+    pq.pop();
 
-    for (auto it = graph[now].begin(); it != graph[now].end(); it++)
+    if (dist[now] < dis)
+      continue;
+
+    for (int i = 0; i < station[now].size(); i++)
     {
-      // if (dist[*it] > drop + 1 && !visit[*it])
-      if (dist[*it] > dist[now] + 1 && !visit[*it])
+      vector<int> hyper = station[station[now][i]];
+      for (int j = 0; j < hyper.size(); j++)
       {
-        dist[*it] = dist[now] + 1;
-        que.push(*it);
-        // dist[*it] = drop + 1;
-        // que.push({*it, drop + 1});
+        if (dist[hyper[j]] > dis + 1)
+        {
+          dist[hyper[j]] = dis + 1;
+          pq.push({-dist[hyper[j]], hyper[j]});
+        }
       }
     }
   }
 
-  if (dist[n] == INF)
-    cout << -1 << endl;
-  else
-    cout << dist[n] << endl;
+  cout << (dist[n] == INF ? -1 : dist[n]) << endl;
 }
