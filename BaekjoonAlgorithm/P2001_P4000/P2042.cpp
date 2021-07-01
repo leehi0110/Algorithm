@@ -1,6 +1,6 @@
 // ProblemNumber || ProblemName : P2042 - 구간 합 구하기
 // 하면서 좀 더 깊게 생각하게 된 것들
-// ->
+// -> a에 따라서 c를 int 혹은 long long으로 선언한 뒤 입력을 받아야한다.
 
 #include <iostream>
 #include <string>
@@ -40,19 +40,26 @@ int main()
 
   for (int i = 0; i < m + k; i++)
   {
-    int a, b, c;
+    // int a, b, c;
+    int a;
 
-    cin >> a >> b >> c;
+    cin >> a;
 
     if (a == 1)
     {
-      // 값 변경
-      update(0, arr.size() - 1, 1, b - 1, static_cast<ll>(c) - arr[b - 1]);
-      arr[b - 1] = static_cast<ll>(c);
+      int b;
+      ll c;
+
+      cin >> b;
+      cin >> c;
+
+      update(0, arr.size() - 1, 1, b - 1, c - arr[b - 1]);
+      arr[b - 1] = c;
     }
     else
     {
-      // 구간 합 출력
+      int b, c;
+      cin >> b >> c;
       cout << sum(0, arr.size() - 1, 1, b - 1, c - 1) << "\n";
     }
   }
